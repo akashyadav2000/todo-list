@@ -1,0 +1,98 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to right, #e9defa, #f5e3e6);
+  /* background: linear-gradient(to top, #83eaf1, #dbf3fa); */
+  /* background: linear-gradient(to right, #fdcbf1, #d4f3ff); */
+}
+
+#groceryList {
+  width: 300px;
+  background: linear-gradient(
+    to top,
+    #fdcbf1 0%,
+    #fdcbf1 1%,
+    #e6dee9 100%
+  );
+  border: 1px solid rgb(99, 99, 99);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgb(97, 97, 97);
+}
+
+#addItemContainer {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#addItemInput {
+  flex-grow: 1;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ff5733;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+#addItemButton {
+  background-color: #ff5733;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+#addItemButton:hover {
+  background-color: #ff8c66; /* Lighter orange on hover */
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px;
+  margin-bottom: 10px;
+  background: linear-gradient(to right, #fdcbf1, #d4f3ff);
+  border: 1px solid #000000;
+}
+
+.item span {
+  flex-grow: 1;
+  margin-right: 10px;
+  word-wrap: break-word; /* Add this line */
+}
+
+.item button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  transition: color 0.3s ease;
+}
+
+.item button:hover {
+  color: #ff5733;
+}
+
+.item input {
+  flex-grow: 1;
+  border: none;
+  padding: 5px;
+  font-size: 14px;
+  outline: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.edit-mode {
+  background-color: #eaf3fc; /* Light blue background for the edited item */
+}

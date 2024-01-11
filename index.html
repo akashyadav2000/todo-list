@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="todo.css" />
+  </head>
+  <body>
+    <div id="groceryList">
+      <div id="addItemContainer">
+        <input type="text" id="addItemInput" placeholder="Add a new todo..." />
+        <button id="addItemButton" onclick="addItem()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+      <div id="itemsContainer"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const addItemInput = document.getElementById("addItemInput");
+        const addItemButton = document.getElementById("addItemButton");
+        const itemsContainer = document.getElementById("itemsContainer");
+
+        addItemInput.addEventListener("keyup", function (event) {
+          if (event.key === "Enter") {
+            addItem();
+          }
+        });
+
+        addItemButton.addEventListener("click", addItem);
+
+        function addItem() {
+          const itemName = addItemInput.value.trim();
+
+          if (itemName !== "") {
+            const itemDiv = document.createElement("div");
+            itemDiv.classList.add("item");
+
+            const itemText = document.createElement("span");
+            itemText.textContent = itemName;
+
+            const editButton = document.createElement("button");
+            editButton.innerHTML = '<i class="fas fa-edit"></i>';
+            editButton.addEventListener("click", function () {
+              toggleEditMode(itemDiv);
+            });
+
+            const deleteButton = document.createElement("button");
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteButton.addEventListener("click", function () {
+              itemDiv.remove();
+            });
+
+            itemDiv.appendChild(itemText);
+            itemDiv.appendChild(editButton);
+            itemDiv.appendChild(deleteButton);
+
+            itemsContainer.appendChild(itemDiv);
+
+            addItemInput.value = "";
+          }
+        }
+
+        function toggleEditMode(itemDiv) {
+          const itemText = itemDiv.querySelector("span");
+          const editButton = itemDiv.querySelector("button");
+
+          if (itemDiv.classList.contains("edit-mode")) {
+            // Save changes
+            const inputElement = itemText.querySelector("input");
+            itemText.textContent = inputElement.value;
+            itemDiv.classList.remove("edit-mode");
+            editButton.innerHTML = '<i class="fas fa-edit"></i>';
+          } else {
+            // Enter edit mode
+            const inputElement = document.createElement("input");
+            inputElement.type = "text";
+            inputElement.value = itemText.textContent;
+            itemDiv.classList.add("edit-mode");
+            editButton.innerHTML = '<i class="fas fa-check"></i>';
+            itemText.innerHTML = "";
+            itemText.appendChild(inputElement);
+            inputElement.focus();
+
+            inputElement.addEventListener("keyup", function (event) {
+              if (event.key === "Enter") {
+                // Save changes when Enter key is pressed
+                itemText.textContent = inputElement.value;
+                itemDiv.classList.remove("edit-mode");
+                editButton.innerHTML = '<i class="fas fa-edit"></i>';
+              }
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
